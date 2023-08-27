@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaEntidad
+namespace CapaDatosTests
 {
-    public class tipo_usuario
+    internal class CD_usuariosTests
     {
-        public int ID { get; set; }
-        public string nombret { get; set; }
     }
 }

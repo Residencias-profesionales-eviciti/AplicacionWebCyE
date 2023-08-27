@@ -13,6 +13,8 @@ using CapaNegocio;
 
 namespace AplicacionWebCyE.Controllers
 {
+    //[Authorize]
+
     public class DepartamentoController : Controller
     {
         string SistemaContext = ConfigurationManager.ConnectionStrings["SistemaContext"].ConnectionString.ToString();

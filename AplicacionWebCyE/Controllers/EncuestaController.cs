@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using System.Data;
-using System.Data.SqlClient;
 
 using CapaEntidad;
 using CapaNegocio;
@@ -13,51 +11,52 @@ using CapaDatos;
 
 namespace AplicacionWebCyE.Controllers
 {
-    public class UsuarioController : Controller
+    public class EncuestaController : Controller
     {
-        // GET: Usuario
+        // GET: Encuesta
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public JsonResult ListarUsuarios()
+        public JsonResult ListarEncuesta()
         {
-            List<Usuario> olista = new List<Usuario>();
+            List<Encuesta> olista = new List<Encuesta>();
 
-            olista = new CN_Usuario().Listar(); //llamando a la capa de negocio
+            olista = new CN_Encuesta().Listar(); //llamando a la capa de negocio
 
             return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult GuardarUsuario(Usuario objeto)
+        public JsonResult GuardarEncuesta(Encuesta objeto)
         {
             object resultado; //Debe ir solo la variable
             string Mensaje = string.Empty;
 
-            if (objeto.IdUsuario == 0)
+            if (objeto.IdEncuesta == 0)
             {
-                resultado = new CN_Usuario().Registrar(objeto, out Mensaje);
+                resultado = new CN_Encuesta().Registrar(objeto, out Mensaje);
             }
             else
             {
-                resultado = new CN_Usuario().Editar(objeto, out Mensaje);
+                resultado = new CN_Encuesta().Editar(objeto, out Mensaje);
             }
 
             return Json(new { resultado = resultado, Mensaje = Mensaje }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult EliminarUsuario(int id = 0)
+        public JsonResult EliminarEncuesta(int id)
         {
-            bool resultado = false;
+            bool respuesta = false;
             string mensaje = string.Empty;
 
-            resultado = new CN_Encuesta().Eliminar(id, out mensaje);
+            respuesta = new CN_Encuesta().Eliminar(id, out mensaje);
 
-            return Json(new { resultado = resultado }, JsonRequestBehavior.AllowGet);
+            return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

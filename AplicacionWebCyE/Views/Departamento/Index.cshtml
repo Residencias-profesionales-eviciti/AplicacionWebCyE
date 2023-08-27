@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Dashboard</a></li>
     <li class="breadcrumb-item active">Departamentos</li>
@@ -173,12 +172,13 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                            debugger;
 
                             if (data.resultado) {
                                 tabladata.row(departamentoSeleccionado).remove().draw();
+                                swal("Éxito", "El departamento se eliminó correctamente", "success");
                             } else {
                                 swal("Error", data.mensaje, "error");
+                                swal("Error", "El departamento no se ha eliminó correctamente", "success");
                             }
                         },
                         error: function (data) {
@@ -219,10 +219,14 @@
                                 departamentos.ID = data.resultado;
                                 tabladata.row.add(departamentos).draw(false);
                                 $("#FormModal").modal("hide");
+                                swal("Mensaje", "Se ha guardado el departamento.", "success");
 
                             } else {
+                                swal(data.mensaje, "error");
                                 $("#mensajeError").text(data.mensaje);
                                 $("#mensajeError").show();
+                                /*swal("Mensaje", "No se ha podido guardar los cambios11.", "error")*/;
+                                swal("Advertencia", data.mensaje, "warning");
 
                             }
                         }
@@ -233,9 +237,11 @@
                                 tabladata.row(filaSeleccionada).data(departamentos).draw(false);
                                 filaSeleccionada = null;
                                 $("#FormModal").modal("hide");
+                                swal("Mensaje", "Los cambios al departamento se han guardado de forma correcta.", "success");
                             } else {
                                 $("#mensajeError").text(data.mensaje);
                                 $("#mensajeError").show();
+                                swal("Mensaje", "No se ha podido guardar los cambios.", "error");                    
                             }
                         }
                     },

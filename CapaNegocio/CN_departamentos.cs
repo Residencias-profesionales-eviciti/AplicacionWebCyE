@@ -10,7 +10,7 @@ using CapaEntidad;
 
 namespace CapaNegocio
 {
-    public  class CN_departamentos
+    public class CN_departamentos
     {
         private CD_departamentos objCapaDato = new CD_departamentos();
 
