@@ -14,7 +14,7 @@ namespace CapaNegocio
     {
         private CD_Usuario objCapaDato = new CD_Usuario();
 
-        public List<Usuario> Listar()
+        public List<Usuario> Listar() 
         {
             return objCapaDato.Listar();
         }
