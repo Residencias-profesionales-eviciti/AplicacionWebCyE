@@ -4,9 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using System.Data;
-using System.Data.SqlClient;
-
 using CapaEntidad;
 using CapaNegocio;
 using CapaDatos;
@@ -50,14 +47,15 @@ namespace AplicacionWebCyE.Controllers
         }
 
         [HttpPost]
-        public JsonResult EliminarUsuario(int id = 0)
+        public JsonResult EliminarUsuario(int id)
         {
             bool resultado = false;
             string mensaje = string.Empty;
 
-            resultado = new CN_Encuesta().Eliminar(id, out mensaje);
+            resultado = new CN_Usuario().Eliminar(id, out mensaje);
 
-            return Json(new { resultado = resultado }, JsonRequestBehavior.AllowGet);
+            return Json(new { resultado = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

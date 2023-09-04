@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-    internal class EncuestaPregunta
+    public class EncuestaPregunta
     {
-        public int ID { get; set; }
+        public int IdEncuesta_pregunta { get; set; }
+        public Encuesta oIdEncuesta { get; set; }
 
-        public Encuesta oEncuesta { get; set; }
-        public EncuestaPreguntaTipo oEncuestaPreguntaTipo { get; set; }
         public string Titulo { get; set; }
+        public string Forma_respuesta { get; set; }
 
+        public string Tipo_respuesta { get; set; }
 
-        public virtual ICollection<Pregunta> EncuestasPreguntas { get; set; }
+        //public List<EncuestaPreguntaTipo> oEncuestaPreguntaTipo { get; set; }
+       
     }
 
     public enum EncuestaPreguntaTipo

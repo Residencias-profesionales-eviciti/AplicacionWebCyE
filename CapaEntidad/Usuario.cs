@@ -14,7 +14,6 @@ namespace CapaEntidad
         public string Nombres { get; set; }
         public string Apellido_paterno { get; set; }
         public string Apellido_materno { get; set; }
-        public string Genero { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }

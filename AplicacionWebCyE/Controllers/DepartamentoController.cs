@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,18 +7,21 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 using System.Web.Script.Serialization;
+
 
 using CapaEntidad;
 using CapaNegocio;
+using System.Net;
 
 namespace AplicacionWebCyE.Controllers
 {
-    //[Authorize]
 
     public class DepartamentoController : Controller
     {
-        string SistemaContext = ConfigurationManager.ConnectionStrings["SistemaContext"].ConnectionString.ToString();
+        //string SistemaContext = ConfigurationManager.ConnectionStrings["SistemaContext"].ConnectionString.ToString();
+        //private SistemaContext db = new DBSISTEMAEntitiesDBSISTEMAEntitiesDBSISTEMAEntities();
 
         // GET: Departamento
         public ActionResult Index()
@@ -33,6 +37,11 @@ namespace AplicacionWebCyE.Controllers
             olista = new CN_departamentos().Listar(); //llamando a la capa de negocio
 
             return Json(new { data = olista }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View();
         }
 
 

@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Dashboard</a></li>
+    <li class="breadcrumb-item active">Preguntas</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">
+
+        <i class="fas fa-users me-1"></i> Preguntas de Encuesta
+    </div>
+    <hr />
+    <div class="col-log-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Detalles de la encuesta</h3>
+                    </div>
+                    <div class="card-body p-0 py-2">
+                        <div class="container-fluid">
+                            <p>Titulo: <b></b></p>
+                            <p class="mb-0">Descripción:</p>
+                            <small></small>
+                            <p>Inicio: <b></b></p>
+                            <p>Final: <b></b></p>
+                            <p>Número de encuestados: <b></b></p>
+                        </div>
+                        <hr class="border-primary">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-outline card-success">
+                    <div class="card-header">
+                        <h3 class="card-title"><b>Preguntas de la encuesta</b></h3>
+                        <div class="card-tools">
+                            <button class="btn btn-block btn-sm btn-default btn-flat border-success nueva_pregunta" type="button" onclick="abrirModal(null)"><i class="fa fa-plus"></i> Agregar nueva pregunta</button>
+                        </div>
+                    </div>
+                    <form action="" id="gestionar-preg">
+                        <div class="card-body ui-sortable">
+
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva pregunta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtid" type="hidden" value="0" />
+
+                <div class="row g-2">
+                    <div class="col-mb-4">
+                        <label for="txttitulo" class="form-label">Nombre de la pregunta</label>
+                        <input type="text" class="form-control" id="txttitulo" placeholder="Ingrese titulo a la pregunta" style="height: 90px; resize: none; width:450px" autocomplete="off">
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="txtdescripcion" class="form-label">Tipo de Respuesta a Pregunta</label>
+                        <select id="txtotipo" name="txtotipo" class="form-select" onclick="Respuesta(null)">
+                            <option value="radio_opt">Sencilla</option>
+                            <option value="check_opt">Opción multiple</option>
+                            <option value="textfield_s">Campor de texto</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <b>Avance</b>
+                        <div class="preview">
+                            <center><b>Selecciona una opcion para empezar.</b></center>
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="row mt-2">
+                    <div class="col-12">
+
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            A simple danger alert—check it out!
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+
+        var tabladata;
+        var filaSeleccionada;
+
+
+        function Respuesta() {
+            var tipo = $("#txtotipo").val();
+            var preview = $("#preview");
+            var previewhtml = "";
+                if (tipo == "radio_opt") {
+                    previewhtml = '<div class="form-check"><input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"><label class="form-check-label" for="flexRadioDefault1">Default radio</label></div>';
+                }
+                else if (tipo == "check_opt") {
+                    previewhtml = '<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"><label class="form-check-label" for="flexCheckDefault">Default checkbox</label></div>';
+                }
+                else if (tipo == "textfield_s") {
+                    previewhtml = '<div class="form-floating mb-3"><input type="text" class="form-control" id="floatingInput" placeholder=""><label for="floatingInput">Respuesta</label></div>';
+                }
+         }
+
+            
+
+
+        function abrirModal(json) {
+
+            $("#txtid").val(0);
+            $("#txtnombre").val("");
+            $("#txtdescripcion").val("");
+            $("#txtfechaInicio").val("");
+            $("#txtfechaCierre").val("");
+            $("#txtoactivo").val("");
+            $("#txtousuario").val($("#txtousuario option:first").val());
+            $("#txtotipo").val($("#txtotipo option:first").val());
+            if("txtotipo" == "radio_opt")
+            {
+                $("#preview").val($("#preview option:first").val());
+            }
+            else if ("txtotipo" == "check_opt") {
+                $("#preview").val("radio_opt");
+            }
+            else if ("txtotipo" == "textfield_s") {
+                $("#preview").val($("#preview option:first").val());
+            }
+            else
+            {
+                $("#preview").val($("#preview option:first").val());
+            }
+
+            $("#mensajeError").hide();
+
+
+            //Modal con información, editar
+            if (json != null) {
+
+                $("#txtid").val(json.IdEncuesta);
+                $("#txtnombre").val(json.Nombre);
+                $("#txtdescripcion").val(json.Descripcion);
+                $("#txtfechaInicio").val(json.Fecha_inicio);
+                $("#txtfechaCierre").val(json.Fecha_cierre);
+                $("#txtoactivo").val(json.Status == true ? 1 : 0);
+                $("#txtousuario").val(json.oIdUsuario.IdUsuario);
+
+            }
+
+            $("#FormModal").modal("show");
+        }
+
+       //Opción de elegir tipo de respuesta
+        @*jQuery.ajax({
+            url: '@Url.Action("ListarTipoRespuesta", "Tipo_Respuesta")',
+            type: "GET",
+            data: null,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#txtotipo").html("");
+
+                $("<option>").attr({ "value": "0", "disabled": true }).text("Seleccionar").appendTo("#txtotipo");
+
+                $.each(data.data, function (index, item) {
+
+                    $("<option>").attr({ "value": item.ID }).text(item.descripcion).appendTo("#txtotipo");
+                })
+
+                if ($("#txtotipo").val() == "1") {
+                    $("#txtotipo").val('radio_opt') ? 'radio' : checkbox;
+
+                }
+                else {
+
+                }
+
+            },
+
+
+
+            error: function (error) {
+                console.log(error)
+            }
+        });*@
+
+
+
+
+        function guardar() {
+            var tipo = document.getElementById('txtotipo').value;
+
+            if (tipo == '1') {
+                var respuesta
+            }
+        }
+
+
+
+
+
+    </script>
+
+}
+
+
+

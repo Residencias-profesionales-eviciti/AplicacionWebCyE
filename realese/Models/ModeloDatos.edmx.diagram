@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83bd156d6fa641a0be0f3434d24a7441" Name="Diagram1">
+        <EntityTypeShape EntityType="DBSISTEMAModel.cuestionarios" Width="1.5" PointX="5.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.departamentos" Width="1.5" PointX="5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.encuestas" Width="1.5" PointX="7" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.tipo_respuesta" Width="1.5" PointX="0.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.tipo_usuario" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBSISTEMAModel.usuarios" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="DBSISTEMAModel.FK__cuestiona__ID_us__5AEE82B9" />
+        <AssociationConnector ManuallyRouted="false" Association="DBSISTEMAModel.FK__usuarios__ID_dep__4D94879B" />
+        <AssociationConnector ManuallyRouted="false" Association="DBSISTEMAModel.FK__encuestas__ID_us__5535A963" />
+        <AssociationConnector ManuallyRouted="false" Association="DBSISTEMAModel.FK__usuarios__ID_tip__4E88ABD4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

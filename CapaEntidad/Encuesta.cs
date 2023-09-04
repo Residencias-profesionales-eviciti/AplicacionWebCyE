@@ -16,5 +16,7 @@ namespace CapaEntidad
         public DateTime Fecha_cierre { get; set; }
         public bool Status { get; set; }
 
+        public virtual Usuario oUsuario { get; set; }
+
     }
 }

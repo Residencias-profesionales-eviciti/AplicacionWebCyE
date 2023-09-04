@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,9 +34,9 @@ namespace CapaDatos
                                 new departamentos()
                                 {
                                     ID = Convert.ToInt32(dr["ID"]),
-                                    nombre = dr["nombre"].ToString()
-                                }
-                                );
+                                    nombre = dr["nombre"].ToString(),
+                                    Status = Convert.ToBoolean(dr["Status"])
+                                });
                         }
                     }
                 }
@@ -58,6 +59,7 @@ namespace CapaDatos
                 {
                     SqlCommand cmd = new SqlCommand("sp_RegistrarDepartamento", oconexion);
                     cmd.Parameters.AddWithValue("nombre", obj.nombre);
+                    cmd.Parameters.AddWithValue("Status", obj.Status);
                     cmd.Parameters.Add("resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -88,19 +90,21 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    SqlCommand cmd = new SqlCommand("sp_EditarDepartamento", oconexion);
+                    SqlCommand cmd = new SqlCommand("sp_ModificarDepartamento", oconexion);
                     cmd.Parameters.AddWithValue("ID", obj.ID);
                     cmd.Parameters.AddWithValue("nombre", obj.nombre);
-                    cmd.Parameters.Add("resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.Parameters.AddWithValue("Status", obj.Status);
+
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    //cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
 
                     cmd.ExecuteNonQuery();
 
-                    resultado = Convert.ToBoolean(cmd.Parameters["resultado"].Value);
-                    mensaje = cmd.Parameters["mensaje"].Value.ToString();
+                    resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                    //mensaje = cmd.Parameters["mensaje"].Value.ToString();
                 }
 
             }
@@ -123,10 +127,12 @@ namespace CapaDatos
                 {
                     SqlCommand cmd = new SqlCommand("sp_EliminarDepartamento", oconexion);
                     cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     oconexion.Open();
 
+                    resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
                     resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
                     
                 }

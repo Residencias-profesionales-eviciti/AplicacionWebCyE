@@ -50,6 +50,7 @@
     <Compile Include="EncuestaPregunta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RespuestaUsuario.cs" />
+    <Compile Include="Tipo_Respuesta.cs" />
     <Compile Include="tipo_usuario.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

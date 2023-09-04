@@ -5,14 +5,14 @@
 }
 
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Dashboard</a></li>
-    <li class="breadcrumb-item active">Departamentos</li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Panel de administración</a></li>
+    <li class="breadcrumb-item active">Usuarios</li>
 </ol>
 
 <div class="card">
     <div class="card-header">
 
-        <i class="fas fa-users me-1"></i> Lista Usuarios
+        <i class="fas fa-users me-1"></i> Lista de Usuarios
     </div>
 
     <div class="card-body">
@@ -27,16 +27,14 @@
         <table id="tabla" class="display cell-border" style="width: 100%">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Genero</th>
-                    <th>Correo</th>
+                    @*<th>ID</th>*@
+                    <th>Nombre Completo</th>
+                    <th>Teléfono</th>
+                    <th>Correo Electrónico</th>
                     <th>Departamento</th>
                     <th>Rol</th>
-                    <th>Activo</th>
-                    <th></th>
+                    <th>Status</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,93 +43,96 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <input id="txtid" type="hidden" value="0" />
 
 
-                <div class="row g-2">
-                    <div class="col-sm-6">
-                        <label for="txtnombre" class="form-label">Nombre del usuario</label>
-                        <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese nombre" autocomplete="off">
+        <!-- Modal -->
+        <div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
 
-                    <div class="col-sm-6">
-                        <label for="txtApellidoP" class="form-label">Apellido paterno del usuario</label>
-                        <input type="text" class="form-control" id="txtApellidoP" placeholder="Ingrese apellido paterno" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="txtApellidoM" class="form-label">Apellido materno del usuario</label>
-                        <input type="text" class="form-control" id="txtApellidoM" placeholder="Ingrese apellido materno" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="txtgenero" class="form-label">Genero</label>
-                        <input type="text" class="form-control" id="txtgenero" placeholder="Ingrese genero" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="txttelefono" class="form-label">Telefono</label>
-                        <input type="text" class="form-control" id="txttelefono" placeholder="Ingrese telefeno" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="txtcorreo" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="txtcorreo" placeholder="Ingrese correo" autocomplete="off">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="txtclave" class="form-label">Clave</label>
-                        <input type="text" class="form-control" id="txtclave" placeholder="Ingrese clave" autocomplete="off">
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="form-label">Departamento</label>
-                        <select id="txtodepartamento" class="form-select">
-                        </select>
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="form-label">Tipo</label>
-                        <select id="txtorol" class="form-select">
-                        </select>
-                    </div>
+                        <input id="txtid" type="hidden" value="0" />
 
 
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <label for="txtnombre" class="form-label">Nombre(s)</label>
+                                <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese nombre" autocomplete="off">
+                            </div>
 
-                </div>
-                <div class="row mt-2">
-                    <div class="col-12">
+                            <div class="col-sm-6">
+                                <label for="txtApellidoP" class="form-label">Apellido paterno</label>
+                                <input type="text" class="form-control" id="txtApellidoP" placeholder="Ingrese apellido paterno" autocomplete="off">
+                            </div>
 
-                        <div id="mensajeError" class="alert alert-danger" role="alert">
-                            A simple danger alert—check it out!
+                            <div class="col-sm-6">
+                                <label for="txtApellidoM" class="form-label">Apellido materno</label>
+                                <input type="text" class="form-control" id="txtApellidoM" placeholder="Ingrese apellido materno" autocomplete="off">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="txttelefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="txttelefono" placeholder="Ingrese teléfeno" autocomplete="off">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="txtcorreo" class="form-label">Correo electrónico</label>
+                                <input type="text" class="form-control" id="txtcorreo" placeholder="Ingrese correo electrónico" autocomplete="off">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="txtclave" class="form-label">Clave</label>
+                                <input type="text" class="form-control" id="txtclave" placeholder="Ingrese clave" autocomplete="off">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="cboactivo" class="form-label">Status</label>
+                                <select id="cboactivo" class="form-select">
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="form-label">Departamento</label>
+                                <select id="txtodepartamento" class="form-select">
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="form-label">Tipo</label>
+                                <select id="txtorol" class="form-select">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+
+                                <div id="mensajeError" class="alert alert-danger" role="alert">
+                                    A simple danger alert—check it out!
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+                    </div>
                 </div>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
             </div>
         </div>
-    </div>
-</div>
 
 
-@section scripts {
-    <script>
+        @section scripts {
+
+            <script>
             var tabladata;
             var filaSeleccionada;
 
@@ -160,11 +161,21 @@
             },
 
             "columns": [
-                { "data": "IdUsuario" },
-                { "data": "Nombres" },
-                { "data": "Apellido_paterno" },
-                { "data": "Apellido_materno" },
-                { "data": "Genero" },
+               /* { "data": "IdUsuario" },*/
+
+                { "data": null,
+                    "render": function (data, type, row) {
+                        return data.Nombres + " " + data.Apellido_paterno + " " + data.Apellido_materno
+
+                    }
+                },
+
+               /* { "data": "Nombres" },*/
+                //{ "data": "Apellido_paterno" },
+                //{ "data": "Apellido_materno" },
+
+                { "data": "Telefono" },
+
                 { "data": "Correo" },
 
                 {
@@ -183,13 +194,14 @@
                 {
                     "data": "Status", "render": function (data) {
                         if (data) {
-                            return '<span class="badge badge-success">Activo</span>'
+                            return '<span class = "badge bg-success">Si</span>'
                         } else {
-                            return '<span class="badge badge-danger">No Activo</span>'
+                            return '<span class = "badge bg-danger">No</span>'
                         }
                     }
                 },
-                {   
+
+                {
 
                     "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class="fas fa-pen"></i></button>' +
                         '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>',
@@ -202,8 +214,6 @@
                 "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json"
             }
         });
-
-
 
 
 
@@ -261,10 +271,10 @@
                 $("#txtnombre").val("");
                 $("#txtApellidoP").val("");
                 $("#txtApellidoM").val("");
-                $("#txtgenero").val("");
                 $("#txttelefono").val("");
                 $("#txtcorreo").val("");
                 $("#txtclave").val("");
+                $("#cboactivo").val(1);
                 $("#txtodepartamento").val($("#txtodepartamento option:first").val());
                 $("#txtorol").val($("#txtorol option:first").val());
 
@@ -278,10 +288,10 @@
                     $("#txtnombre").val(json.Nombres);
                     $("#txtApellidoP").val(json.Apellido_paterno);
                     $("#txtApellidoM").val(json.Apellido_materno);
-                    $("#txtgenero").val(json.Genero);
                     $("#txttelefono").val(json.Telefono);
                     $("#txtcorreo").val(json.Correo);
                     $("#txtclave").val(json.Clave);
+                    $("#cboactivo").val(json.Status == true ? 1 : 0);
                     $("#txtodepartamento").val(json.oIdDepartamento.ID);
                     $("#txtorol").val(json.oIdRol.ID);
                 }
@@ -328,11 +338,11 @@
                         success: function (data) {
 
                             if (data.resultado) {
+                                /*swal("Error", data.Mensaje, "error");*/
                                 tabladata.row(UsuarioSeleccionado).remove().draw();
-                                swal("Éxito", "El Usuario se eliminó correctamente", "success");
                             } else {
-                                swal("Error", data.mensaje, "error");
-                                swal("Error", "El Usuario no se eliminó correctamente", "success");
+                                swal("Error", data.Mensaje, "error");
+                                swal("Error", "El Usuario no se eliminó correctamente", "error");
                             }
                         },
                         error: function (data) {
@@ -360,14 +370,15 @@
                         ID: $("#txtorol option:selected").val(),
                         nombret: $("#txtorol option:selected").text()
                     },
-         
+
                     Nombres: $("#txtnombre").val(),
                     Apellido_paterno: $("#txtApellidoP").val(),
                     Apellido_materno: $("#txtApellidoM").val(),
-                    Genero: $("#txtgenero").val(),
                     Telefono: $("#txttelefono").val(),
                     Correo: $("#txtcorreo").val(),
                     Clave: $("#txtclave").val(),
+                    Status: $("#cboactivo").val() == 1 ? true : false
+
 
                 }
 
@@ -389,7 +400,7 @@
                                 Usuario.IdUsuario = data.resultado;
                                 tabladata.row.add(Usuario).draw(false);
                                 $("#FormModal").modal("hide");
-                                swal("Mensaje", "El usuario se ha agregado de forma correcta", "success");
+                                swal("¡Bien hecho!", "El usuario se ha agregado de forma correcta", "success");
 
                             } else {
                                 $("#mensajeError").text(data.Mensaje);
@@ -406,11 +417,11 @@
                                 tabladata.row(filaSeleccionada).data(Usuario).draw(false);
                                 filaSeleccionada = null;
                                 $("#FormModal").modal("hide");
-                                swal("Mensaje", "El usuario se ha editado de forma correcta.", "success");  
+                                swal("¡Exito!", "El usuario se ha editado de forma correcta.", "success");
                             } else {
                                 $("#mensajeError").text(data.mensaje);
                                 $("#mensajeError").show();
-                                swal("Mensaje", "No se pudo guardar los cambios.", "error");
+                                swal("Opps", "No se pudo guardar los cambios.", "error");
                             }
                         }
                     },
@@ -425,8 +436,8 @@
 
             }
 
-    </script>
+            </script>
 
-}
+        }
 
 

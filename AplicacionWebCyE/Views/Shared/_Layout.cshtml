@@ -1,4 +1,6 @@
 ﻿<!DOCTYPE html>
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -11,14 +13,14 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="@Url.Action("Index","Home")">Start Bootstrap</a>
+        <a class="navbar-brand ps-3" href="@Url.Action("Index","Home")">Eviciti Technologies</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                @*<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />*@
+                @*<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>*@
             </div>
         </form>
         <!-- Navbar-->
@@ -41,9 +43,9 @@
                         <div class="sb-sidenav-menu-heading">Resumen</div>
                         <a class="nav-link" href="@Url.Action("Index","Home")">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                            Administración
                         </a>
-                        <div class="sb-sidenav-menu-heading">Administración </div>
+                        <div class="sb-sidenav-menu-heading">Administración</div>
                         <a class="nav-link" href="@Url.Action("Index","Departamento")">
                             <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
                             Departamentos
@@ -63,17 +65,17 @@
                         <div class="sb-sidenav-menu-heading">Mantenimiento</div>
                         <a class="nav-link" href="charts.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
+                            Gráficos
                         </a>
                         <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
+                            Tablas
                         </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    <div class="small">Acediendo como:</div>
+                    Encargado de departamento
                 </div>
             </nav>
         </div>
@@ -87,11 +89,11 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div class="text-muted">Copyright &copy; Eviciti Technologies 2023</div>
                         <div>
-                            <a href="#">Privacy Policy</a>
+                            <a href="#">Política de privacidad</a>
                             &middot;
-                            <a href="#">Terms &amp; Conditions</a>
+                            <a href="#">Terminos &amp; Condiciones</a>
                         </div>
                     </div>
                 </div>

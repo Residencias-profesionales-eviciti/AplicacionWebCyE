@@ -12,7 +12,7 @@ namespace AplicacionWebCyE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class encuestas
+    public class encuestas
     {
         public int ID { get; set; }
         public Nullable<int> ID_usuario { get; set; }

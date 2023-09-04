@@ -36,10 +36,10 @@ namespace CapaNegocio
             else if (string.IsNullOrEmpty(obj.Apellido_materno) || string.IsNullOrWhiteSpace(obj.Apellido_materno))
             {
                 Mensaje = "El apellido materno del usuario no puede estar vacio.";
+                Mensaje = "El correo electronico es necesario para el registro.";
             }
             else if (string.IsNullOrEmpty(obj.Correo) || string.IsNullOrWhiteSpace(obj.Correo))
             {
-                Mensaje = "El correo electronico es necesario para el registro.";
             }
             //else if(string.Equals(obj.Correo,obj.Correo) || string.IsNullOrWhiteSpace(obj.Correo))
             //{
@@ -100,6 +100,7 @@ namespace CapaNegocio
 
         public bool Eliminar(int id, out string Mensaje)
         {
+            Mensaje = "Eliminado";
             return objCapaDato.Eliminar(id, out Mensaje);
         }
 

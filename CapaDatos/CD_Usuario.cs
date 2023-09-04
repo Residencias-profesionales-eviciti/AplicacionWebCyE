@@ -52,7 +52,6 @@ namespace CapaDatos
                                     Nombres = dr["Nombres"].ToString(),
                                     Apellido_paterno = dr["Apellido_paterno"].ToString(),
                                     Apellido_materno = dr["Apellido_materno"].ToString(),
-                                    Genero = dr["Genero"].ToString(),
                                     Telefono = dr["Telefono"].ToString(),
                                     Correo = dr["Correo"].ToString(),
                                     Clave = dr["Clave"].ToString(),
@@ -84,11 +83,10 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("IdRol", obj.oIdRol.ID);
                     cmd.Parameters.AddWithValue("Apellido_paterno", obj.Apellido_paterno);
                     cmd.Parameters.AddWithValue("Apellido_materno", obj.Apellido_materno);
-                    cmd.Parameters.AddWithValue("Genero", obj.Genero);
                     cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
                     cmd.Parameters.AddWithValue("Correo", obj.Correo);
                     cmd.Parameters.AddWithValue("Clave", obj.Clave);
-
+                    cmd.Parameters.AddWithValue("Status", obj.Status);
 
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     //cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
@@ -126,7 +124,6 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Nombres", obj.Nombres);
                     cmd.Parameters.AddWithValue("Apellido_paterno", obj.Apellido_paterno);
                     cmd.Parameters.AddWithValue("Apellido_materno", obj.Apellido_materno);
-                    cmd.Parameters.AddWithValue("Genero", obj.Genero);
                     cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
                     cmd.Parameters.AddWithValue("Correo", obj.Correo);
                     cmd.Parameters.AddWithValue("Clave", obj.Clave);

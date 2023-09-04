@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_EncuestaPregunta.cs" />
     <Compile Include="CN_Reporte.cs" />
     <Compile Include="CN_TipoUsuario.cs" />
     <Compile Include="CN_departamentos.cs" />
+    <Compile Include="CN_Tipo_Respuesta.cs" />
     <Compile Include="CN_Usuario.cs" />
     <Compile Include="CN_Encuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

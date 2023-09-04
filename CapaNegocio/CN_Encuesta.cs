@@ -48,7 +48,7 @@ namespace CapaNegocio
 
             if (string.IsNullOrEmpty(obj.Nombre) || string.IsNullOrWhiteSpace(obj.Nombre))
             {
-                mensaje = "El nombre del cuestionario no puede estar vacio.";
+                mensaje = "El nombre de la encuesta no puede estar vacio.";
             }
 
             if (string.IsNullOrEmpty(mensaje))
@@ -65,6 +65,7 @@ namespace CapaNegocio
         {
             return objCapaDato.Eliminar(id, out mensaje);
         }
+
 
     }
 }

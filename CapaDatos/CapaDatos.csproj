@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="CD_departamentos.cs" />
     <Compile Include="CD_Encuesta.cs" />
+    <Compile Include="CD_EncuestaPregunta.cs" />
     <Compile Include="CD_Reporte.cs" />
     <Compile Include="CD_TipoUsuario.cs" />
+    <Compile Include="CD_Tipo_Respuesta.cs" />
     <Compile Include="CD_Usuario.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,14 +5,14 @@
 }
 
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Panel de administración</a></li>
     <li class="breadcrumb-item active">Departamentos</li>
 </ol>
 
 <div class="card">
     <div class="card-header">
 
-        <i class="fas fa-users me-1"></i> Lista Departamentos
+        <i class="fas fa-building me-1"></i> Lista de Departamentos
     </div>
 
     <div class="card-body">
@@ -27,9 +27,10 @@
         <table id="tabla" class="display cell-border" style="width: 100%">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    @*<th>ID</th>*@
                     <th>Departamento</th>
-                    <th></th>
+                    <th>Status</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +44,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Departamento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -51,14 +52,21 @@
                 <input id="txtid" type="hidden" value="0" />
 
 
-                    <div class="row g-2">
-                        <div class="col-sm-6">
-                            <label for="txtnombre" class="form-label">Nombre del departamento</label>
-                            <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese nombre" autocomplete="off">
-                        </div>
-
-
+                <div class="row g-2">
+                    <div class="col-sm-6">
+                        <label for="txtnombre" class="form-label">Nombre del departamento</label>
+                        <input type="text" class="form-control" id="txtnombre" placeholder="Ingrese nombre" autocomplete="off">
                     </div>
+                    <div class="col-sm-6">
+                        <label for="cboactivo" class="form-label">Status</label>
+                        <select id="cboactivo" class="form-select">
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+
+                </div>
                 <div class="row mt-2">
                     <div class="col-12">
 
@@ -80,8 +88,8 @@
 </div>
 
 
-    @section scripts {
-        <script>
+@section scripts {
+    <script>
             var tabladata;
             var filaSeleccionada;
 
@@ -96,34 +104,48 @@
          }
      })
 
-     tabladata = $("#tabla").DataTable({
-         responsive: true,
-         ordering: false,
-         "ajax": {
-             "url": '@Url.Action("ListarDepartamentos", "Departamento")',
-             "type": "GET",
-             "datatype": "json"
-         },
-         "columns": [
-             {"data":"ID"},
-             { "data": "nombre" },
-             {
-                 "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class="fas fa-pen"></i></button>' +
-                     '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>',
-                 "orderable": false,
-                 "searchable": false,
-                 "width": "90px"
-             }
-         ],
-            "language": {
-             "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json"
-         }
-     });
+         tabladata = $("#tabla").DataTable({
+                 responsive: true,
+                 ordering: false,
+                 "ajax": {
+                     "url": '@Url.Action("ListarDepartamentos", "Departamento")',
+                     "type": "GET",
+                     "datatype": "json"
+                 },
+                 "columns": [
+                    /* { "data": "ID" },*/
+
+                     { "data": "nombre" },
+
+                     {
+                         "data": "Status", "render": function (data) {
+                             if (data) {
+                                 return '<span class = "badge bg-success">Si</span>'
+                             } else {
+                                 return '<span class = "badge bg-danger">No</span>'
+                             }
+                         }
+                     },
+
+                     {
+                         "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class="fas fa-pen"></i></button>' +
+                             '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash"></i></button>',
+                         "orderable": false,
+                         "searchable": false,
+                         "width": "90px"
+                     }
+                 ],
+                    "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json"
+                        }
+         });
 
             function abrirModal(json) {
 
                 $("#txtid").val(0);
                 $("#txtnombre").val("");
+                $("#cboactivo").val(1);
+
 
                 $("#mensajeError").hide();
 
@@ -133,6 +155,8 @@
 
                     $("#txtid").val(json.ID);
                     $("#txtnombre").val(json.nombre);
+                    $("#cboactivo").val(json.Status == true ? 1 : 0);
+
                 }
 
                 $("#FormModal").modal("show");
@@ -175,7 +199,6 @@
 
                             if (data.resultado) {
                                 tabladata.row(departamentoSeleccionado).remove().draw();
-                                swal("Éxito", "El departamento se eliminó correctamente", "success");
                             } else {
                                 swal("Error", data.mensaje, "error");
                                 swal("Error", "El departamento no se ha eliminó correctamente", "success");
@@ -197,7 +220,9 @@
                 var departamentos = {
 
                     ID: $("#txtid").val(),
-                    nombre: $("#txtnombre").val()
+                    nombre: $("#txtnombre").val(),
+                    Status: $("#cboactivo").val() == 1 ? true : false
+
 
                 }
 
@@ -219,7 +244,7 @@
                                 departamentos.ID = data.resultado;
                                 tabladata.row.add(departamentos).draw(false);
                                 $("#FormModal").modal("hide");
-                                swal("Mensaje", "Se ha guardado el departamento.", "success");
+                                swal("¡Bien hecho!", "Se ha guardado el departamento.", "success");
 
                             } else {
                                 swal(data.mensaje, "error");
@@ -237,11 +262,11 @@
                                 tabladata.row(filaSeleccionada).data(departamentos).draw(false);
                                 filaSeleccionada = null;
                                 $("#FormModal").modal("hide");
-                                swal("Mensaje", "Los cambios al departamento se han guardado de forma correcta.", "success");
+                                swal("¡Exito!", "Los cambios al departamento se han guardado de forma correcta.", "success");
                             } else {
                                 $("#mensajeError").text(data.mensaje);
                                 $("#mensajeError").show();
-                                swal("Mensaje", "No se ha podido guardar los cambios.", "error");                    
+                                swal("Mensaje", "No se ha podido guardar los cambios.", "error");
                             }
                         }
                     },
@@ -253,9 +278,9 @@
 
                     }
                 });
-                                                     
-            }
-                
-        </script>
 
- }
+            }
+
+    </script>
+
+}

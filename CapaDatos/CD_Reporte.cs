@@ -33,6 +33,7 @@ namespace CapaDatos
                             objeto = new Dashboard()
                             {
                                 TotalUsuario = Convert.ToInt32(dr["TotalUsuario"]),
+                                TotalDepartamento = Convert.ToInt32(dr["TotalDepartamento"]),
                                 TotalEncuesta = Convert.ToInt32(dr["TotalEncuesta"]),
                                 TotalCuestionario = Convert.ToInt32(dr["TotalCuestionario"])
                             };

@@ -19,5 +19,6 @@ namespace CapaNegocio
             return objCapaDato.Listar();
         }
 
+
     }
 }
